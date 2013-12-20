@@ -19,6 +19,16 @@ api.prototype.init = function(Gamify, callback){
 	
 	this.Gamify = Gamify;
 	
+	this.transport	= nodemailer.createTransport("SMTP", {
+		host: 	"smtp.sendgrid.net",
+		port: 	25,
+		secureConnection: false,
+		auth: {
+			user: "biorad",
+			pass: "2122ftpssh80803666"
+		}
+	});
+	
 	this.render = function(file, params, callback) {
 		
 		
