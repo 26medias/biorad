@@ -11,7 +11,7 @@ console.log("Options",options);
 
 var main;
 if (options.online) {
-	main			= '/home/gitbuffer/Gamify.io/process.js';
+	main			= '/home/gitbuffer/biorad/process.js';
 } else {
 	main			= './process.js';
 }
