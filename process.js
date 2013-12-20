@@ -44,6 +44,7 @@ if ('dev' == app.get('env')) {
 }
 
 
+Gamify.settings.mailmethod 				= options.mailmethod;
 Gamify.settings.db 						= options.db;
 Gamify.settings.systoken 				= "sys540f40c9968814199ec7ca847ec45";
 Gamify.settings.default_race_time		= 5000;		// ms - countdown for the arcade races
@@ -118,8 +119,10 @@ app.get("/", function(req, res){
 	Gamify.api.execute("page", "index", data, function() {}, req.params.format, req, res);
 });
 app.get("/activate/:uid", function(req, res){
-	Gamify.log("data",req.params);
 	Gamify.api.execute("user", "activate", {uid:req.params.uid}, function() {}, req.params.format, req, res);
+});
+app.get("/card/:uuid", function(req, res){
+	Gamify.api.execute("page", "card", {card:req.params.uuid}, function() {}, req.params.format, req, res);
 });
 app.get("/about", function(req, res){
 	res.set("Content-Type", "application/json");

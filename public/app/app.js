@@ -4,8 +4,15 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return {};
 }).factory('UserApi', function($http) {
 	
-	var IP 		= "67.43.2.92";
-	var port	= 80;
+	var dev = false;
+	
+	if (dev) {
+		var IP 		= "127.0.0.1";
+		var port	= 8080;
+	} else {
+		var IP 		= "67.43.2.92";
+		var port	= 80;	
+	}
 	
 	return {
 		login: function(email, password, callback) {
@@ -61,6 +68,19 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 					return response.data[0];
 				} else {
 					return false;
+				}
+			});
+			return promise;
+		},
+		send: function(authtoken, emails, message, signature, callback) {
+			console.log("URL","http://"+IP+":"+port+"/api/email/send/jsonp?callback=JSON_CALLBACK&authtoken="+escape(authtoken)+"&emails="+JSON.stringify(emails)+"&message="+escape(message)+"&signature="+escape(signature));
+			var promise = $http.jsonp("http://"+IP+":"+port+"/api/email/send/jsonp?callback=JSON_CALLBACK&authtoken="+escape(authtoken)+"&emails="+JSON.stringify(emails)+"&message="+escape(message)+"&signature="+escape(signature)).then(function(response) {
+				data = response.data;
+				if (data.error) {
+					alert(data.error.message);
+					return false;
+				} else {
+					return data;
 				}
 			});
 			return promise;
@@ -190,6 +210,10 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 				shared.emails.push($scope.emails[i].email);
 			}
 		}
+		
+		UserApi.send(shared.user.authtoken, shared.emails,$scope.message,$scope.signature).then(function(data) {
+			console.log("data",data);
+		});
 		
 		shared.message 		= $scope.message;
 		shared.signature 	= $scope.signature;
