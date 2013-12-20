@@ -8,6 +8,8 @@ var http 		= require('http');
 var path 		= require('path');
 var Gamify 		= require("Gamify.io");
 
+process.setMaxListeners(0);
+
 var options = _.extend({
 	online:			true,
 	env:			"dev",
