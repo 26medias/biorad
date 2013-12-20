@@ -192,10 +192,11 @@ api.prototype.init = function(Gamify, callback){
 						collection:		'users',
 						data:			userdata
 					}, function() {
-						scope.Gamify.api.execute("user","getAuthToken", {user: {uid:uid}}, function(response) {
+						callback({registered: true});
+						/*scope.Gamify.api.execute("user","getAuthToken", {user: {uid:uid}}, function(response) {
 							callback(response);
 							//@TODO: Send email
-						});
+						});*/
 					});
 					
 					// Send the confirmation email

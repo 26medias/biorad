@@ -51,7 +51,6 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 			return promise;
 		},
 		register: function(firstname, lastname, email, password, callback) {
-			console.log("url","http://"+IP+":"+port+"/api/user/create/jsonp?callback=JSON_CALLBACK&data="+escape(JSON.stringify({email:email+'@bio-rad.com',password:password,firstname:firstname,lastname:lastname})));
 			var promise = $http.jsonp("http://"+IP+":"+port+"/api/user/create/jsonp?callback=JSON_CALLBACK&data="+escape(JSON.stringify({email:email+'@bio-rad.com',password:password,firstname:firstname,lastname:lastname}))).then(function(response) {
 				data = response.data;
 				if (data.error) {
@@ -74,7 +73,6 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 			return promise;
 		},
 		send: function(authtoken, emails, message, signature, callback) {
-			console.log("URL","http://"+IP+":"+port+"/api/email/send/jsonp?callback=JSON_CALLBACK&authtoken="+escape(authtoken)+"&emails="+JSON.stringify(emails)+"&message="+escape(message)+"&signature="+escape(signature));
 			var promise = $http.jsonp("http://"+IP+":"+port+"/api/email/send/jsonp?callback=JSON_CALLBACK&authtoken="+escape(authtoken)+"&emails="+JSON.stringify(emails)+"&message="+escape(message)+"&signature="+escape(signature)).then(function(response) {
 				data = response.data;
 				if (data.error) {
