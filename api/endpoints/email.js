@@ -15,8 +15,6 @@ function api() {
 api.prototype.init = function(Gamify, callback){
 	var scope = this;
 	
-	
-		
 	this.transport	= nodemailer.createTransport("SMTP", {
 		host: 	"smtp.sendgrid.net",
 		port: 	25,
