@@ -110,6 +110,10 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		controller:'sentCtrl',
 		templateUrl:'app/views/sent.html'
 	})
+	.when('/activate', {
+		controller:'activateCtrl',
+		templateUrl:'app/views/register_confirmation.html'
+	})
 	.otherwise({
 		redirectTo:'/'
 	});
@@ -188,11 +192,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 				UserApi.register($scope.firstname,$scope.lastname,$scope.email,$scope.password).then(function(data) {
 					$scope.loading 		= false;
 					if (data) {
-						/*// Save the data
-						$.cookie("authtoken", 	data.authtoken);
-						$.cookie("uid", 		data.uid);
-						// Move to the list of levels*/
 						$scope.registered = true;
+						$location.path("activate");
 					}
 				});
 			},
@@ -255,6 +256,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	}
 	$scope.message 		= shared.message;
 	$scope.signature 	= shared.signature;
+}).controller('activateCtrl', function($scope, $location, UserApi, shared) {
+	
 })
 ;
 
