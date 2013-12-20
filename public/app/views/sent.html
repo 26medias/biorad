@@ -1,0 +1,28 @@
+<div class="alert alert-success">Your card has been sent to the following email addresses:</div>
+<ul class="list-group">
+	<li class="list-group-item" ng-repeat="email in emails">{{email}}</li>
+</ul>
+
+<center>
+	<a class="btn btn-info space" href="#/write">Create another card</a>
+</center>
+
+<hr />
+
+<div class="preview">
+	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="887" height="560" id="myFlashMovie" align="middle">
+		<param name="movie" value="swf/card.swf" />
+		<param name=FlashVars value="comment_field={{message|escape}}&name_field={{signature|escape}}" />
+		<!--[if !IE]>-->
+		<object type="application/x-shockwave-flash" data="swf/card.swf" width="887" height="560">
+			<param name="movie" value="swf/card.swf" />
+			<param name=FlashVars value="comment_field={{message|escape}}&name_field={{signature|escape}}" />
+			<!--<![endif]-->
+			<a href="http://www.adobe.com/go/getflash">
+				<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+			</a>
+			<!--[if !IE]>-->
+		</object>
+		<!--<![endif]-->
+	</object>
+</div>

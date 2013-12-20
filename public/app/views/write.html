@@ -1,0 +1,67 @@
+<table class="formtbl" ng-show="!preview">
+	<tbody>
+		<tr>
+			<td style="width:150px;vertical-align:top;">
+				<label for="message">Your message</label>
+			</td>
+			<td>
+				<textarea id="message" class="form-control" ng-model="message" placeholder="Your message"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:100px;">
+				<label for="signature">Your Signature</label>
+			</td>
+			<td>
+				<input type="text" class="form-control" id="signature" ng-model="signature" placeholder="Your signature">
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<center>
+	<div class="btn btn-info space" ng-click="preview=!preview">{{preview?'Edit':'Preview'}}</div>
+	<div class="btn btn-primary space" ng-click="send()">Send</div>
+</center>
+
+<div class="preview" ng-show="preview">
+	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="887" height="560" id="myFlashMovie" align="middle">
+		<param name="movie" value="swf/card.swf" />
+		<param name=FlashVars value="comment_field={{message|escape}}&name_field={{signature|escape}}" />
+		<!--[if !IE]>-->
+		<object type="application/x-shockwave-flash" data="swf/card.swf" width="887" height="560">
+			<param name="movie" value="swf/card.swf" />
+			<param name=FlashVars value="comment_field={{message|escape}}&name_field={{signature|escape}}" />
+			<!--<![endif]-->
+			<a href="http://www.adobe.com/go/getflash">
+				<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+			</a>
+			<!--[if !IE]>-->
+		</object>
+		<!--<![endif]-->
+	</object>
+</div>
+
+
+<div ng-show="!preview">
+	
+	<hr />
+
+	<table class="formtbl">
+		<tbody>
+			<tr ng-repeat="item in emails">
+				<td style="width:100px;">
+					<label for="email{{$index}}">Email {{$index+1}}</label>
+				</td>
+				<td>
+					<input type="text" class="form-control" id="email{{$index}}" ng-model="item.email" placeholder="Emails #{{$index+1}}">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr />
+
+</div>
+
+

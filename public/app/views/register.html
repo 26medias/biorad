@@ -1,0 +1,57 @@
+<h1>2013 GREETING E-CARD</h1>
+
+<div ng-show="registered==false">
+	<table class="formtbl">
+		<tbody>
+			<tr>
+				<td style="width:200px;">
+					<label for="firstname">Firstname</label>
+				</td>
+				<td colspan="2">
+					<input type="text" class="form-control" id="firstname" ng-model="firstname" placeholder="Firstname">
+				</td>
+			</tr>
+			<tr>
+				<td style="width:100px;">
+					<label for="lastname">Lastname</label>
+				</td>
+				<td colspan="2">
+					<input type="text" class="form-control" id="lastname" ng-model="lastname" placeholder="Lastname">
+				</td>
+			</tr>
+			<tr>
+				<td style="width:100px;">
+					<label for="email">Email</label>
+				</td>
+				<td>
+					<input type="text" class="form-control" id="email" ng-model="email" placeholder="Email">
+				</td>
+				<td style="width:50px;">
+					@bio-rad.com
+				</td>
+			</tr>
+			<tr>
+				<td style="width:100px;">
+					<label for="password">Password</label>
+				</td>
+				<td colspan="2">
+					<input type="password" class="form-control" id="password" ng-model="password" placeholder="Password">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<center>
+		<div class="btn btn-primary" ng-click="register()">Register</div>
+	</center>
+
+	<hr />
+
+	<center>
+		<a class="btn btn-primary" href="#login">Already have an account?</a>
+	</center>
+</div>
+
+<div ng-show="registered">
+	<div class="alert alert-success">Please check your emails and click on the link we sent you to confirm the ownership of your account.</div>
+</div>

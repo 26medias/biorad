@@ -1,0 +1,37 @@
+<h1>2013 GREETING E-CARD</h1>
+
+<div class="alert alert-success" ng-show="confirmed">Your account has been activated. Please login to continue.</div>
+
+<table class="formtbl">
+	<tbody>
+		<tr>
+			<td style="width:100px;">
+				<label for="email">Email</label>
+			</td>
+			<td>
+				<input type="text" class="form-control" id="email" ng-model="email" placeholder="Email">
+			</td>
+			<td style="width:50px;">
+				@bio-rad.com
+			</td>
+		</tr>
+		<tr>
+			<td style="width:100px;">
+				<label for="password">Password</label>
+			</td>
+			<td colspan="2">
+				<input type="password" class="form-control" id="password" ng-model="password" placeholder="Password">
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<center>
+	<div class="btn btn-primary" ng-click="login()">Login</div>
+</center>
+
+<hr />
+
+<center>
+	<a class="btn btn-primary" href="#register">Create an account</a>
+</center>
