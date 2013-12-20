@@ -94,8 +94,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	});
 }).controller('loginCtrl', function($scope, $routeParams, $location, UserApi, shared) {
 	
-	$scope.email 		= "julien";
-	$scope.password 	= "80803666";
+	$scope.email 		= "";
+	$scope.password 	= "";
 	$scope.loading 		= false;
 	
 	// Check if we were already logged in
@@ -144,8 +144,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	};
 }).controller('registerCtrl', function($scope, $location, UserApi, shared) {
 	
-	$scope.email 		= "julien";
-	$scope.password 	= "80803666";
+	$scope.email 		= "";
+	$scope.password 	= "";
 	$scope.loading 		= false;
 	$scope.registered 	= false;
 	
