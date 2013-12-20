@@ -4,8 +4,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return {};
 }).factory('UserApi', function($http) {
 	
-	var IP 		= "127.0.0.1";
-	var port	= 8080;
+	var IP 		= "67.43.2.92";
+	var port	= 80;
 	
 	return {
 		login: function(email, password, callback) {
