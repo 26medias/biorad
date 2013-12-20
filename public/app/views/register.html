@@ -1,41 +1,41 @@
 <h1>2013 GREETING E-CARD</h1>
 
 <div ng-show="registered==false">
-	<table class="formtbl">
+	<table class="formtbl" id="register-form">
 		<tbody>
-			<tr>
+			<tr class="row">
 				<td style="width:200px;">
 					<label for="firstname">Firstname</label>
 				</td>
 				<td colspan="2">
-					<input type="text" class="form-control" id="firstname" ng-model="firstname" placeholder="Firstname">
+					<input type="text" class="form-control" data-require="true" id="firstname" ng-model="firstname" placeholder="Firstname">
 				</td>
 			</tr>
-			<tr>
+			<tr class="row">
 				<td style="width:100px;">
 					<label for="lastname">Lastname</label>
 				</td>
 				<td colspan="2">
-					<input type="text" class="form-control" id="lastname" ng-model="lastname" placeholder="Lastname">
+					<input type="text" class="form-control" data-require="true" id="lastname" ng-model="lastname" placeholder="Lastname">
 				</td>
 			</tr>
-			<tr>
+			<tr class="row">
 				<td style="width:100px;">
 					<label for="email">Email</label>
 				</td>
 				<td>
-					<input type="text" class="form-control" id="email" ng-model="email" placeholder="Email">
+					<input type="text" class="form-control" data-require="true" id="email" ng-model="email" placeholder="Email">
 				</td>
 				<td style="width:50px;">
 					@bio-rad.com
 				</td>
 			</tr>
-			<tr>
+			<tr class="row">
 				<td style="width:100px;">
 					<label for="password">Password</label>
 				</td>
 				<td colspan="2">
-					<input type="password" class="form-control" id="password" ng-model="password" placeholder="Password">
+					<input type="password" class="form-control" data-require="true" id="password" ng-model="password" placeholder="Password">
 				</td>
 			</tr>
 		</tbody>

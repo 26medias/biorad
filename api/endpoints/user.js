@@ -3,6 +3,13 @@ var qs 					= require("querystring");
 var fbapi 				= require('facebook-api');
 var moment				= require('moment');
 
+var request 			= require('request');
+var Twig				= require("twig").twig;
+var nodemailer 			= require("nodemailer");
+var SendGrid 			= require('sendgrid').SendGrid;
+var Email 				= require('sendgrid').Email;
+var fs 					= require('fs');
+
 // Users
 function api() {
 	
@@ -11,6 +18,24 @@ api.prototype.init = function(Gamify, callback){
 	var scope = this;
 	
 	this.Gamify = Gamify;
+	
+	this.render = function(file, params, callback) {
+		
+		
+		fs.readFile(file, 'utf8', function (err, data) {
+			if (err) {
+				callback(false);
+			} else {
+				var template 		= Twig({
+					data: 	data
+				});
+				var html = template.render(params);
+				callback(true,html);
+			}
+		});
+		
+	};
+	
 	
 	// Return the methods
 	var methods = {
@@ -129,7 +154,7 @@ api.prototype.init = function(Gamify, callback){
 		
 		
 		create: {
-			require:		['data','firstname','lastname'],
+			require:		['data'],
 			auth:			false,
 			description:	"Create a new user using arbitrary data.",
 			params:			{data:'object'},
@@ -145,7 +170,6 @@ api.prototype.init = function(Gamify, callback){
 					params.data	= scope.Gamify.api.fixTypes(params.data, {
 						password:	'md5'
 					});
-					
 				}
 				
 				
@@ -172,6 +196,43 @@ api.prototype.init = function(Gamify, callback){
 							callback(response);
 							//@TODO: Send email
 						});
+					});
+					
+					// Send the confirmation email
+					scope.render("views/confirmation.twig", {
+						uid:		uid,
+						firstname:	params.data.firstname
+					}, function(err, html) {
+						
+						Gamify.log("Using: ",Gamify.settings.mailmethod);
+						
+						switch (Gamify.settings.mailmethod) {
+							default:
+							case "file":
+								var filename = "[registration] "+params.data.email+".html";
+								
+								fs.writeFile("output/"+filename, html, function(err) {
+									if(err) {
+										console.log(err);
+									} else {
+										console.log("Email saved as ","output/"+filename);
+									}
+								}); 
+							break;
+							case "smtp":
+								scope.transport.sendMail(
+									{
+										from: 		"Bio-Rad <no-reply@bio-rad.com>",
+										to: 		params.data.email,
+										subject: 	"Bio-Rad 2014 Wishes: Account activation needed.",
+										html: 		html
+									},
+									function(error, response){
+										
+									}
+								);
+							break;
+						}
 					});
 				}
 				

@@ -4,7 +4,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return {};
 }).factory('UserApi', function($http) {
 	
-	var dev = false;
+	var dev = true;
 	
 	if (dev) {
 		var IP 		= "127.0.0.1";
@@ -51,6 +51,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 			return promise;
 		},
 		register: function(firstname, lastname, email, password, callback) {
+			console.log("url","http://"+IP+":"+port+"/api/user/create/jsonp?callback=JSON_CALLBACK&data="+escape(JSON.stringify({email:email+'@bio-rad.com',password:password,firstname:firstname,lastname:lastname})));
 			var promise = $http.jsonp("http://"+IP+":"+port+"/api/user/create/jsonp?callback=JSON_CALLBACK&data="+escape(JSON.stringify({email:email+'@bio-rad.com',password:password,firstname:firstname,lastname:lastname}))).then(function(response) {
 				data = response.data;
 				if (data.error) {
@@ -147,23 +148,34 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	
 	$scope.login = function() {
 		$scope.loading 		= true;
-		UserApi.login($scope.email,$scope.password).then(function(data) {
-			$scope.loading 		= false;
-			if (data) {
-				// Save the data
-				$.cookie("authtoken", 	data.authtoken);
-				$.cookie("uid", 		data.uid);
-				
-				// Save the login info
-				shared.user = data;
-				
-				// Move to the list of levels
-				$location.path("write");
+		$("#login-form").formapi({
+			success: 		function(response) {
+				UserApi.login($scope.email,$scope.password).then(function(data) {
+					$scope.loading 		= false;
+					if (data) {
+						// Save the data
+						$.cookie("authtoken", 	data.authtoken);
+						$.cookie("uid", 		data.uid);
+						
+						// Save the login info
+						shared.user = data;
+						
+						// Move to the list of levels
+						$location.path("write");
+					}
+				});
+			},
+			fail:			function() {
+				alert("Please fill the form.");
 			}
 		});
+		
+		
 	};
 }).controller('registerCtrl', function($scope, $location, UserApi, shared) {
 	
+	$scope.firstname 	= "";
+	$scope.lastname 	= "";
 	$scope.email 		= "";
 	$scope.password 	= "";
 	$scope.loading 		= false;
@@ -171,16 +183,24 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	
 	$scope.register = function() {
 		$scope.loading 		= true;
-		UserApi.register($scope.firstname,$scope.lastname,$scope.email,$scope.password).then(function(data) {
-			$scope.loading 		= false;
-			if (data) {
-				/*// Save the data
-				$.cookie("authtoken", 	data.authtoken);
-				$.cookie("uid", 		data.uid);
-				// Move to the list of levels*/
-				$scope.registered = true;
+		$("#register-form").formapi({
+			success: 		function(response) {
+				UserApi.register($scope.firstname,$scope.lastname,$scope.email,$scope.password).then(function(data) {
+					$scope.loading 		= false;
+					if (data) {
+						/*// Save the data
+						$.cookie("authtoken", 	data.authtoken);
+						$.cookie("uid", 		data.uid);
+						// Move to the list of levels*/
+						$scope.registered = true;
+					}
+				});
+			},
+			fail:			function() {
+				alert("Please fill the form.");
 			}
 		});
+		
 	};
 }).controller('writeCtrl', function($scope, $location, UserApi, shared) {
 	
@@ -209,6 +229,10 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 			if ($scope.emails[i].email != "") {
 				shared.emails.push($scope.emails[i].email);
 			}
+		}
+		if (shared.emails.length == 0) {
+			alert("Please enter at least one email address");
+			return false;
 		}
 		
 		UserApi.send(shared.user.authtoken, shared.emails,$scope.message,$scope.signature).then(function(data) {
