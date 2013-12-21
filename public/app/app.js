@@ -14,7 +14,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return {};
 }).factory('UserApi', function($http) {
 	
-	var dev = true;
+	var dev = false;
 	
 	if (dev) {
 		var IP 		= "127.0.0.1";
