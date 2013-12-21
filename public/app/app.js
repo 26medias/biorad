@@ -4,7 +4,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return {};
 }).factory('UserApi', function($http) {
 	
-	var dev = false;
+	var dev = true;
 	
 	if (dev) {
 		var IP 		= "127.0.0.1";
@@ -219,6 +219,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		$scope.emails.push({email:''});
 	}
 	
+	$('#message').limit('140','#charsLeft');
+	
 	$scope.send = function() {
 		//@TODO: send
 		shared.emails 		= [];
@@ -247,6 +249,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	if (!shared.user || !shared.user.authtoken) {
 		$location.path("/");
 	}
+	$scope.display = false;
 	
 	$scope.emails 		= _.uniq(shared.emails);
 	if ($scope.emails.length == 0) {
@@ -254,6 +257,11 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	}
 	$scope.message 		= shared.message;
 	$scope.signature 	= shared.signature;
+	window.setTimeout(function() {
+		$scope.display = true;
+		$scope.$apply();
+		console.log("display",$scope.display);
+	},800);
 }).controller('activateCtrl', function($scope, $location, UserApi, shared) {
 	
 })
