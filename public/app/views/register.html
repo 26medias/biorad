@@ -2,11 +2,11 @@
 	<table class="formtbl" id="register-form">
 		<tbody>
 			<tr class="row">
-				<td style="width:200px;">
+				<td style="width:100px;">
 					<label for="firstname">Firstname</label>
 				</td>
 				<td colspan="2">
-					<input type="text" class="form-control" data-require="true" id="firstname" ng-model="firstname" placeholder="Firstname">
+					<input type="text" data-enter=".btn-register" class="form-control" data-require="true" id="firstname" ng-model="firstname" placeholder="Firstname">
 				</td>
 			</tr>
 			<tr class="row">
@@ -14,7 +14,7 @@
 					<label for="lastname">Lastname</label>
 				</td>
 				<td colspan="2">
-					<input type="text" class="form-control" data-require="true" id="lastname" ng-model="lastname" placeholder="Lastname">
+					<input type="text" data-enter=".btn-register" class="form-control" data-require="true" id="lastname" ng-model="lastname" placeholder="Lastname">
 				</td>
 			</tr>
 			<tr class="row">
@@ -22,9 +22,9 @@
 					<label for="email">Email</label>
 				</td>
 				<td>
-					<input type="text" class="form-control" data-require="true" id="email" ng-model="email" placeholder="Email">
+					<input type="text" data-enter=".btn-register" class="form-control" data-require="true" id="email" ng-model="email" placeholder="Email">
 				</td>
-				<td style="width:50px;">
+				<td style="width:50px;font-weight:bold;">
 					@bio-rad.com
 				</td>
 			</tr>
@@ -33,14 +33,14 @@
 					<label for="password">Password</label>
 				</td>
 				<td colspan="2">
-					<input type="password" class="form-control" data-require="true" id="password" ng-model="password" placeholder="Password">
+					<input type="password" data-enter=".btn-register" class="form-control" data-require="true" id="password" ng-model="password" placeholder="Password">
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<center>
-		<div class="btn btn-primary" ng-click="register()">Register</div>
+		<div class="btn btn-primary btn-register" ng-click="register()">Register</div>
 	</center>
 
 	<hr />

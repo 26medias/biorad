@@ -1,3 +1,13 @@
+$(function() {
+	$('body').on('keydown','[data-enter]',function(e) {
+		e.stopImmediatePropagation();
+		if (e.keyCode == 13) {
+			$($(this).attr('data-enter')).click();
+		}
+	});
+});
+
+
 angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return encodeURIComponent;
 }).factory("shared", function(){
@@ -121,6 +131,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	$scope.password 	= "";
 	$scope.loading 		= false;
 	
+	$("body").addClass("narrow");
+	
 	// Check if we were already logged in
 	$scope.authtoken 	= $.getCookie("authtoken");
 	
@@ -183,6 +195,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	$scope.loading 		= false;
 	$scope.registered 	= false;
 	
+	$("body").addClass("narrow");
+	
 	$scope.register = function() {
 		$scope.loading 		= true;
 		$("#register-form").formapi({
@@ -202,6 +216,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		
 	};
 }).controller('writeCtrl', function($scope, $location, UserApi, shared) {
+	
+	$("body").removeClass("narrow");
 	
 	if (!shared.user || !shared.user.authtoken) {
 		$location.path("/");
@@ -246,6 +262,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	}
 }).controller('sentCtrl', function($scope, $location, UserApi, shared) {
 	
+	$("body").removeClass("narrow");
+	
 	if (!shared.user || !shared.user.authtoken) {
 		$location.path("/");
 	}
@@ -263,6 +281,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		console.log("display",$scope.display);
 	},800);
 }).controller('activateCtrl', function($scope, $location, UserApi, shared) {
+	
+	$("body").removeClass("narrow");
 	
 })
 ;

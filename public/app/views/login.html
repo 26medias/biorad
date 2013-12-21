@@ -7,9 +7,9 @@
 				<label for="email">Email</label>
 			</td>
 			<td>
-				<input type="text" class="form-control" data-require="true" id="email" ng-model="email" placeholder="Email">
+				<input type="text" data-enter=".btn-login" class="form-control" data-require="true" id="email" ng-model="email" placeholder="Email">
 			</td>
-			<td style="width:50px;">
+			<td style="width:50px;font-weight:bold;">
 				@bio-rad.com
 			</td>
 		</tr>
@@ -18,14 +18,14 @@
 				<label for="password">Password</label>
 			</td>
 			<td colspan="2">
-				<input type="password" class="form-control" data-require="true" id="password" ng-model="password" placeholder="Password">
+				<input type="password" data-enter=".btn-login" class="form-control" data-require="true" id="password" ng-model="password" placeholder="Password">
 			</td>
 		</tr>
 	</tbody>
 </table>
 
 <center>
-	<div class="btn btn-primary" ng-click="login()">Login</div>
+	<div class="btn btn-primary btn-login" ng-click="login()">Login</div>
 </center>
 
 <hr />

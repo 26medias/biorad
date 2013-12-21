@@ -10,6 +10,10 @@ body > .container {
 	max-width:		887px;
 	padding:		0;
 }
+body.narrow > .container {
+	max-width:		400px;
+	padding:		0;
+}
 
 table.formtbl {
 	width: 100%;
