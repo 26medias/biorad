@@ -264,6 +264,17 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		}]
 	});
 	
+	$.apicall({
+		method:	"stats.biorad_users",
+		params: {
+			authtoken:	syskey
+		},
+		callback:	function(data) {
+			$scope.users = data;
+			$scope.$apply();
+		}
+	});
+	
 })
 ;
 
@@ -357,16 +368,12 @@ $(function() {
 				method:		split[1]
 			};
 			
-			//console.group("JSONP :: "+api.endpoint+"/"+api.method);
-			//console.info("Parameters: ", options.params);
-			
 			$.ajax({
 				url: 		"http://"+IP+":"+port+"/api/"+api.endpoint+"/"+api.method+"/jsonp",		// static url for the API calls
 				dataType: 	'jsonp',
 				type:		"GET",
 				data:		options.params,
 				success: 	function(data){
-					//console.log("response",data);
 					// check for error
 					if (data.error) {
 						if (data.error && data.error.message) {
@@ -378,11 +385,9 @@ $(function() {
 						}
 					}
 					options.callback(data);
-				//console.groupEnd();
 				},
 				error: function(jqXHR, data, errorThrown) {
 					options.onFail("Response Format Error");
-				//console.groupEnd();
 				}
 			});
 			

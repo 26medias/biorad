@@ -1,5 +1,39 @@
-<div class="chart" id="user.growth"></div>
-<div class="chart" id="user.new"></div>
-<div class="chart" id="cards.growth"></div>
-<div class="chart" id="cards.sent"></div>
-<div class="chart" id="cards.views"></div>
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="chart" id="user.growth"></div>
+		<div class="chart" id="user.new"></div>
+		<div class="chart" id="cards.growth"></div>
+		<div class="chart" id="cards.sent"></div>
+		<div class="chart" id="cards.views"></div>
+	</div>
+</div>
+
+
+<hr />
+<div class="panel panel-default">
+	<div class="panel-body">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Email</th>
+					<th>Cards sent</th>
+					<th>Cards opened</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in users">
+					<td>{{user.firstname}}</td>
+					<td>{{user.lastname}}</td>
+					<td>{{user.email}}</td>
+					<td>{{user.sent}}</td>
+					<td>{{user.seen}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
