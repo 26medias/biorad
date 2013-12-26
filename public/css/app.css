@@ -29,3 +29,10 @@ table.formtbl {
 .space {
 	margin: 15px 0;
 }
+
+div.chart {
+	margin:		2px 2px;
+	width:		436px;
+	display:	inline-block;
+	height:		300px;
+}

@@ -124,6 +124,9 @@ app.get("/activate/:uid", function(req, res){
 app.get("/card/:uuid", function(req, res){
 	Gamify.api.execute("page", "card", {card:req.params.uuid}, function() {}, req.params.format, req, res);
 });
+app.get("/stats", function(req, res){
+	Gamify.api.execute("page", "stats", {}, function() {}, req.params.format, req, res);
+});
 app.get("/about", function(req, res){
 	res.set("Content-Type", "application/json");
 	res.send(200, JSON.stringify({

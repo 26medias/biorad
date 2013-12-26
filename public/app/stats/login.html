@@ -1,0 +1,26 @@
+<div class="alert alert-success">Stats & Reports access. Please identify yourself.</div>
+
+<table class="formtbl" id="login-form">
+	<tbody>
+		<tr class="row">
+			<td style="width:100px;">
+				<label for="email">Login</label>
+			</td>
+			<td>
+				<input type="text" data-enter=".btn-login" class="form-control" data-require="true" id="email" ng-model="login" placeholder="Login">
+			</td>
+		</tr>
+		<tr class="row">
+			<td style="width:100px;">
+				<label for="password">Password</label>
+			</td>
+			<td>
+				<input type="password" data-enter=".btn-login" class="form-control" data-require="true" id="password" ng-model="password" placeholder="Password">
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<center>
+	<div class="btn btn-primary btn-login" ng-click="statslogin()">Login</div>
+</center>

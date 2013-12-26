@@ -32,6 +32,24 @@ api.prototype.init = function(Gamify, callback){
 			}
 		},
 		
+		
+		stats: {
+			require:		[],
+			auth:			false,
+			description:	"Stats page",
+			params:			{},
+			status:			'stable',
+			version:		1,
+			callback:		function(params, req, res, callback) {
+				
+				res.render("stats", {
+					
+				}, function(err, html) {
+					callback(html);
+				});
+			}
+		},
+		
 		card: {
 			require:		[],
 			auth:			false,
