@@ -284,6 +284,25 @@ api.prototype.init = function(Gamify, callback){
 			}
 		},
 		
+		biorad_emails: {
+			require:		[],
+			auth:			"sys",
+			description:	"Aggregate data",
+			params:			{},
+			status:			'dev',
+			version:		1,
+			callback:		function(params, req, res, callback) {
+				
+				scope.mongo.distinct({
+					collection:	"recipient",
+					key:		"to"
+				}, function(emails) {
+					callback(emails);
+				});
+				
+			}
+		},
+		
 		
 		histogram: {
 			require:		['datefield', 'collection', 'query'],

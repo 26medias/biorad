@@ -275,6 +275,17 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		}
 	});
 	
+	$.apicall({
+		method:	"stats.biorad_emails",
+		params: {
+			authtoken:	syskey
+		},
+		callback:	function(data) {
+			$scope.emails = data;
+			$scope.$apply();
+		}
+	});
+	
 })
 ;
 
