@@ -113,8 +113,8 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	});
 }).controller('loginCtrl', function($scope, $routeParams, $location, UserApi, shared) {
 	
-	$scope.login 		= "Comfrance";
-	$scope.password 	= "Bio-Rad2014";
+	$scope.login 		= ""; // Comfrance
+	$scope.password 	= ""; // Bio-Rad2014
 	
 	var login_hash 		= "3d20a267bc208479fe631b45fee717bc";
 	var password_hash 	= "d6dbffb927867b509cbcf54d921d3a8e";
