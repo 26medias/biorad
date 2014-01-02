@@ -37,7 +37,9 @@
 			
 			<script type="text/javascript">
 				window.updateText = function() {
-					return {{card.message|json_encode}};
+					var message = {{card.message|json_encode}};
+					message 	= unescape(message);
+					return message;
 				}
 				window.updateSignature = function() {
 					return {{card.signature|json_encode}};
