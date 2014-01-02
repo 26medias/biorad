@@ -14,7 +14,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
   return {};
 }).factory('UserApi', function($http) {
 	
-	var dev = false;
+	var dev 		= false;
 	
 	if (dev) {
 		var IP 		= "127.0.0.1";
@@ -26,7 +26,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	
 	return {
 		login: function(email, password, callback) {
-			var promise = $http.jsonp("http://"+IP+":"+port+"/api/user/getAuthToken/jsonp?callback=JSON_CALLBACK&user="+escape(JSON.stringify({email:email+'@bio-rad.com',password:password}))).then(function(response) {
+			var promise = $http.jsonp("http://"+IP+":"+port+"/api/user/getAuthToken/jsonp?callback=JSON_CALLBACK&user="+escape(JSON.stringify({email:email,password:password}))).then(function(response) {
 				data = response.data;
 				if (data.error) {
 					alert(data.error.message);
@@ -61,7 +61,7 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 			return promise;
 		},
 		register: function(firstname, lastname, email, password, callback) {
-			var promise = $http.jsonp("http://"+IP+":"+port+"/api/user/create/jsonp?callback=JSON_CALLBACK&data="+escape(JSON.stringify({email:email+'@bio-rad.com',password:password,firstname:firstname,lastname:lastname}))).then(function(response) {
+			var promise = $http.jsonp("http://"+IP+":"+port+"/api/user/create/jsonp?callback=JSON_CALLBACK&data="+escape(JSON.stringify({email:email,password:password,firstname:firstname,lastname:lastname}))).then(function(response) {
 				data = response.data;
 				if (data.error) {
 					alert(data.error.message);
@@ -235,8 +235,17 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 		$scope.emails.push({email:''});
 	}
 	
-	$('#message').limit('140','#charsLeft');
+	$('#message').limit('100','#charsLeft');
 	
+	$scope.previewToggle = function() {
+		$scope.preview = !$scope.preview;
+		window.updateText = function() {
+			return $scope.message;
+		}
+		window.updateSignature = function() {
+			return $scope.signature;
+		}
+	}
 	$scope.send = function() {
 		//@TODO: send
 		shared.emails 		= [];
@@ -273,8 +282,17 @@ angular.module('bioradApp', ['ngRoute']).filter('escape', function() {
 	if ($scope.emails.length == 0) {
 		$location.path("write");
 	}
+	
 	$scope.message 		= shared.message;
 	$scope.signature 	= shared.signature;
+	
+	window.updateText = function() {
+		return $scope.message;
+	}
+	window.updateSignature = function() {
+		return $scope.signature;
+	}
+	
 	window.setTimeout(function() {
 		$scope.display = true;
 		$scope.$apply();
